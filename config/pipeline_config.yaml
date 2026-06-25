@@ -1,0 +1,145 @@
+# =============================================================================
+# AI Pipeline Evaluation - Configuration
+# =============================================================================
+# 
+# SWITCHING PROVIDERS (just change these 3-4 lines):
+#
+# ┌──────────────┬────────────────────────────────────────┬─────────────────────────┐
+# │ Provider     │ model                                  │ api_key_env             │
+# ├──────────────┼────────────────────────────────────────┼─────────────────────────┤
+# │ huggingface  │ mistralai/Mistral-7B-Instruct-v0.3     │ HUGGINGFACE_API_KEY     │
+# │ openai       │ gpt-4o-mini                            │ OPENAI_API_KEY          │
+# │ ollama       │ llama3                                 │ (none needed)           │
+# │ compatible   │ deepseek-chat                          │ DEEPSEEK_API_KEY        │
+# └──────────────┴────────────────────────────────────────┴─────────────────────────┘
+#
+# For OpenAI, also change embedding.model to "text-embedding-3-small" (dims: 1536)
+# =============================================================================
+
+# --- LLM Configuration ---
+# Switch providers by changing 'provider' and 'api_key_env'. That's it.
+#
+# Supported providers:
+#   - openai       : GPT-4o-mini, GPT-4o, GPT-3.5-turbo, etc.
+#   - huggingface  : Mistral, Llama, Phi, Qwen (via HF Inference API)
+#   - ollama       : Any local model (llama3, mistral, codellama, etc.)
+#   - compatible   : Any OpenAI-compatible API (Groq, Together, DeepSeek)
+#
+# To switch from HuggingFace to OpenAI:
+#   1. Change provider: "openai"
+#   2. Change model: "gpt-4o-mini"
+#   3. Change api_key_env: "OPENAI_API_KEY"
+#   Done. Nothing else changes.
+#
+llm:
+  provider: "huggingface"               # openai | huggingface | ollama | compatible
+  model: "mistralai/Mistral-7B-Instruct-v0.3"   # HuggingFace model ID
+  judge_model: "mistralai/Mistral-7B-Instruct-v0.3"  # Model for DeepEval judge
+  api_key_env: "HUGGINGFACE_API_KEY"    # Environment variable name for API key
+  base_url: null                        # Override API base URL (null = use default for provider)
+  temperature: 0.0
+  max_tokens: 4096
+
+# --- GitHub Repositories (Data Sources) ---
+github:
+  repos:
+    - owner: "your-github-username"
+      name: "project-1"
+      branch: "main"
+    - owner: "your-github-username"
+      name: "project-2"
+      branch: "main"
+  # File extensions to extract
+  include_extensions:
+    - ".py"
+    - ".ts"
+    - ".js"
+    - ".java"
+    - ".go"
+    - ".rs"
+  # Directories to skip
+  exclude_dirs:
+    - "node_modules"
+    - ".git"
+    - "__pycache__"
+    - "venv"
+    - ".venv"
+    - "dist"
+    - "build"
+
+# --- Extraction Settings ---
+extraction:
+  clone_dir: "./data/repos"             # Where repos get cloned
+  output_dir: "./data/extracted"        # Where extracted source files are stored
+  max_file_size_kb: 500                 # Skip files larger than this
+
+# --- Chunking / Transform Settings ---
+chunking:
+  strategy: "code_aware"                # code_aware | recursive | fixed_size
+  chunk_size: 1500                      # Tokens per chunk
+  chunk_overlap: 200                    # Overlap between consecutive chunks
+  language_parsers:                     # Language-specific parsing
+    python: true
+    javascript: true
+    typescript: true
+
+# --- Embedding / Vector DB Settings ---
+# Embedding model depends on your provider:
+#   openai:       "text-embedding-3-small" (1536 dims) or "text-embedding-3-large" (3072 dims)
+#   huggingface:  "sentence-transformers/all-MiniLM-L6-v2" (384 dims) or any HF model
+#   ollama:       "nomic-embed-text" (768 dims) or any model that supports /api/embeddings
+#
+embedding:
+  model: "sentence-transformers/all-MiniLM-L6-v2"  # HF embedding model (384 dims)
+  dimensions: 384
+  batch_size: 32
+
+vector_db:
+  provider: "chromadb"                  # chromadb | faiss (future)
+  persist_dir: "./data/chromadb"
+  collection_name: "source_code"
+  distance_metric: "cosine"
+
+# --- RAG Pipeline Settings ---
+rag:
+  top_k: 5                              # Number of chunks to retrieve
+  rerank: true                          # Enable reranking
+  rerank_model: null                    # null = use same model as llm.model
+  similarity_threshold: 0.7             # Minimum similarity score
+
+# --- MCP Server Settings ---
+mcp:
+  host: "localhost"
+  port: 8000
+  tools:
+    - retrieval                         # Search code knowledge base
+    - query_rewriter                    # Rewrite ambiguous queries
+    - answer_scorer                     # Score answer quality
+    - clarify_query                     # Ask clarifying questions
+    - process_query                     # Full query processing pipeline
+    - trigger_extraction                # Trigger repo extraction
+    - trigger_transform                 # Trigger chunking pipeline
+    - pipeline_status                   # Get extraction/chunking status
+
+# --- Evaluation Settings (DeepEval) ---
+evaluation:
+  # Thresholds - tests fail below these scores
+  thresholds:
+    # RAG Metrics
+    context_recall: 0.7
+    context_precision: 0.7
+    context_relevancy: 0.7
+    faithfulness: 0.8
+    answer_relevancy: 0.7
+    # Agent Metrics
+    tool_correctness: 0.8
+    task_completion: 0.7
+    step_efficiency: 0.6
+    argument_correctness: 0.7
+    plan_adherence: 0.7
+
+  # Golden dataset path for evaluation
+  golden_dataset_path: "./eval/datasets/golden_dataset.json"
+
+  # Number of test cases to generate synthetically
+  synthetic_test_count: 20
