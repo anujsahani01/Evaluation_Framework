@@ -1,0 +1,25 @@
+# Step 1: Verify config loads
+python -c "from src.config import load_config; c = load_config(); print(f'Provider: {c.llm.provider}, Repos: {len(c.github.repos)}')"
+
+# Step 2: Extract code from your repos
+python -c "from src.extract import GitHubExtractor; e = GitHubExtractor(); files = e.extract_all(); print(f'Extracted {len(files)} files'); print(e.status)"
+
+# Step 3: Chunk + embed into ChromaDB
+python -c "
+from src.transform import CodeChunker
+from src.embed import Embedder
+from src.extract.github_extractor import ExtractedFile
+import json
+with open('./data/extracted/extracted_files.json') as f:
+    files = [ExtractedFile(**r) for r in json.load(f)]
+chunks = CodeChunker().chunk_all(files)
+print(f'{len(chunks)} chunks created')
+stored = Embedder().embed_and_store(chunks)
+print(f'{stored} embeddings in ChromaDB')
+"
+
+# Step 4: Test a query
+python -c "from src.rag import RAGPipeline; r = RAGPipeline().query('What does HeartNet do?'); print(r.answer)"
+
+# Step 5: Run evals
+deepeval test run eval/

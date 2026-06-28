@@ -11,6 +11,7 @@ build/
 venv/
 .venv/
 env/
+env3.11/
 
 # IDE
 .vscode/
@@ -36,3 +37,6 @@ htmlcov/
 # OS
 .DS_Store
 Thumbs.db
+
+#Logs
+Logs/

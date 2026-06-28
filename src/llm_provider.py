@@ -270,26 +270,21 @@ def _embed_openai(texts: list[str], config: PipelineConfig) -> EmbeddingResponse
 
 
 def _embed_huggingface(texts: list[str], config: PipelineConfig) -> EmbeddingResponse:
-    """Generate embeddings using HuggingFace Inference API."""
-    import httpx
+    """Generate embeddings locally using sentence-transformers (no API needed)."""
+    from sentence_transformers import SentenceTransformer
 
-    api_key = _get_api_key(config)
-    model = config.embedding.model
-    base_url = config.llm.base_url or "https://api-inference.huggingface.co"
-    url = f"{base_url}/pipeline/feature-extraction/{model}"
+    model_name = config.embedding.model
+    model = SentenceTransformer(model_name)
 
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json",
-    }
+    # Truncate long texts to avoid memory issues
+    texts = [t[:2000] if len(t) > 2000 else t for t in texts]
 
-    response = httpx.post(url, json={"inputs": texts}, headers=headers, timeout=120.0)
-    response.raise_for_status()
-    embeddings = response.json()
+    # Generate embeddings locally — no network calls
+    embeddings = model.encode(texts, show_progress_bar=True, normalize_embeddings=True)
 
     return EmbeddingResponse(
-        embeddings=embeddings,
-        model=model,
+        embeddings=embeddings.tolist(),
+        model=model_name,
         provider="huggingface",
     )
 

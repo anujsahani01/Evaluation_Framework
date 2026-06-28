@@ -1,0 +1,84 @@
+2026-06-28 20:45:56 [INFO] Loading chunks from data/chunks/chunks.json
+2026-06-28 20:45:56 [INFO] Successfully loaded 427 chunks from data/chunks/chunks.json
+2026-06-28 20:45:56 [INFO] Generating QA for chunk (ID: anujsahani01/Evaluation_Framework/pyproject.toml::chunk_0) with 1 questions.
+2026-06-28 20:45:56 [ERROR] Error generating QA for chunk (ID: anujsahani01/Evaluation_Framework/pyproject.toml::chunk_0): [Errno 8] nodename nor servname provided, or not known
+2026-06-28 20:45:56 [INFO] Generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/conftest.py::chunk_0) with 1 questions.
+2026-06-28 20:45:56 [ERROR] Error generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/conftest.py::chunk_0): [Errno 8] nodename nor servname provided, or not known
+2026-06-28 20:45:56 [INFO] Generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_retrieval.py::chunk_0) with 1 questions.
+2026-06-28 20:45:56 [ERROR] Error generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_retrieval.py::chunk_0): [Errno 8] nodename nor servname provided, or not known
+2026-06-28 20:45:56 [INFO] Generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_retrieval.py::chunk_1) with 1 questions.
+2026-06-28 20:45:56 [ERROR] Error generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_retrieval.py::chunk_1): [Errno 8] nodename nor servname provided, or not known
+2026-06-28 20:45:56 [INFO] Generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_retrieval.py::chunk_2) with 1 questions.
+2026-06-28 20:45:56 [ERROR] Error generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_retrieval.py::chunk_2): [Errno 8] nodename nor servname provided, or not known
+2026-06-28 20:45:56 [INFO] Generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_retrieval.py::chunk_3) with 1 questions.
+2026-06-28 20:45:56 [ERROR] Error generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_retrieval.py::chunk_3): [Errno 8] nodename nor servname provided, or not known
+2026-06-28 20:45:56 [INFO] Generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_retrieval.py::chunk_4) with 1 questions.
+2026-06-28 20:45:56 [ERROR] Error generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_retrieval.py::chunk_4): [Errno 8] nodename nor servname provided, or not known
+2026-06-28 20:45:56 [INFO] Generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_agent.py::chunk_0) with 1 questions.
+2026-06-28 20:45:56 [ERROR] Error generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_agent.py::chunk_0): [Errno 8] nodename nor servname provided, or not known
+2026-06-28 20:45:56 [INFO] Generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_agent.py::chunk_1) with 1 questions.
+2026-06-28 20:45:56 [ERROR] Error generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_agent.py::chunk_1): [Errno 8] nodename nor servname provided, or not known
+2026-06-28 20:45:56 [INFO] Generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_agent.py::chunk_2) with 1 questions.
+2026-06-28 20:45:56 [ERROR] Error generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_agent.py::chunk_2): [Errno 8] nodename nor servname provided, or not known
+2026-06-28 20:45:56 [INFO] Generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_agent.py::chunk_3) with 1 questions.
+2026-06-28 20:45:56 [ERROR] Error generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_agent.py::chunk_3): [Errno 8] nodename nor servname provided, or not known
+2026-06-28 20:45:56 [INFO] Generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_agent.py::chunk_4) with 1 questions.
+2026-06-28 20:45:56 [ERROR] Error generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_agent.py::chunk_4): [Errno 8] nodename nor servname provided, or not known
+2026-06-28 20:45:56 [INFO] Generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_agent.py::chunk_5) with 1 questions.
+2026-06-28 20:45:56 [ERROR] Error generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_agent.py::chunk_5): [Errno 8] nodename nor servname provided, or not known
+2026-06-28 20:45:56 [INFO] Generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_agent.py::chunk_6) with 1 questions.
+2026-06-28 20:45:56 [ERROR] Error generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_agent.py::chunk_6): [Errno 8] nodename nor servname provided, or not known
+2026-06-28 20:45:56 [INFO] Generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_chunking.py::chunk_0) with 1 questions.
+2026-06-28 20:45:56 [ERROR] Error generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_chunking.py::chunk_0): [Errno 8] nodename nor servname provided, or not known
+2026-06-28 20:45:56 [INFO] Generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_chunking.py::chunk_1) with 1 questions.
+2026-06-28 20:45:56 [ERROR] Error generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_chunking.py::chunk_1): [Errno 8] nodename nor servname provided, or not known
+2026-06-28 20:45:56 [INFO] Generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_chunking.py::chunk_2) with 1 questions.
+2026-06-28 20:45:56 [ERROR] Error generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_chunking.py::chunk_2): [Errno 8] nodename nor servname provided, or not known
+2026-06-28 20:45:56 [INFO] Generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_chunking.py::chunk_3) with 1 questions.
+2026-06-28 20:45:56 [ERROR] Error generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_chunking.py::chunk_3): [Errno 8] nodename nor servname provided, or not known
+2026-06-28 20:45:56 [INFO] Generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_chunking.py::chunk_4) with 1 questions.
+2026-06-28 20:45:56 [ERROR] Error generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_chunking.py::chunk_4): [Errno 8] nodename nor servname provided, or not known
+2026-06-28 20:45:56 [INFO] Generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_chunking.py::chunk_5) with 1 questions.
+2026-06-28 20:45:56 [ERROR] Error generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_chunking.py::chunk_5): [Errno 8] nodename nor servname provided, or not known
+2026-06-28 20:45:56 [INFO] Generated 0 samples
+2026-06-28 20:45:56 [INFO] Evaluation results: ============================================================
+RAG EVALUATION RESULTS
+============================================================
+Total samples evaluated: 0
+Total time: 0.0s
+Retrieval hit rate: 0.0%
+
+Per-metric averages:
+============================================================
+2026-06-29 00:41:40 [INFO] Loading chunks from data/chunks/chunks.json
+2026-06-29 00:41:40 [INFO] Successfully loaded 427 chunks from data/chunks/chunks.json
+2026-06-29 00:41:40 [INFO] Generating QA for chunk (ID: anujsahani01/Evaluation_Framework/pyproject.toml::chunk_0) with 1 questions.
+2026-06-29 00:41:46 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-29 00:41:46 [INFO] Successfully generated single QA pair
+2026-06-29 00:41:46 [INFO] Successfully generated 1 QA pairs for chunk (ID: anujsahani01/Evaluation_Framework/pyproject.toml::chunk_0).
+2026-06-29 00:41:46 [INFO] Generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/conftest.py::chunk_0) with 1 questions.
+2026-06-29 00:41:47 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-29 00:41:47 [INFO] Successfully generated single QA pair
+2026-06-29 00:41:47 [INFO] Successfully generated 1 QA pairs for chunk (ID: anujsahani01/Evaluation_Framework/eval/conftest.py::chunk_0).
+2026-06-29 00:41:47 [INFO] Generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_retrieval.py::chunk_0) with 1 questions.
+2026-06-29 00:41:49 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-29 00:41:49 [INFO] Successfully generated single QA pair
+2026-06-29 00:41:49 [INFO] Successfully generated 1 QA pairs for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_retrieval.py::chunk_0).
+2026-06-29 00:41:49 [INFO] Generated 3 samples
+2026-06-29 00:41:51 [INFO] HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 400 Bad Request"
+2026-06-29 00:45:26 [INFO] Loading chunks from data/chunks/chunks.json
+2026-06-29 00:45:26 [INFO] Successfully loaded 427 chunks from data/chunks/chunks.json
+2026-06-29 00:45:26 [INFO] Generating QA for chunk (ID: anujsahani01/Evaluation_Framework/pyproject.toml::chunk_0) with 1 questions.
+2026-06-29 00:45:28 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-29 00:45:28 [INFO] Successfully generated single QA pair
+2026-06-29 00:45:28 [INFO] Successfully generated 1 QA pairs for chunk (ID: anujsahani01/Evaluation_Framework/pyproject.toml::chunk_0).
+2026-06-29 00:45:28 [INFO] Generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/conftest.py::chunk_0) with 1 questions.
+2026-06-29 00:45:30 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-29 00:45:30 [INFO] Successfully generated single QA pair
+2026-06-29 00:45:30 [INFO] Successfully generated 1 QA pairs for chunk (ID: anujsahani01/Evaluation_Framework/eval/conftest.py::chunk_0).
+2026-06-29 00:45:30 [INFO] Generating QA for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_retrieval.py::chunk_0) with 1 questions.
+2026-06-29 00:45:32 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2026-06-29 00:45:32 [INFO] Successfully generated single QA pair
+2026-06-29 00:45:32 [INFO] Successfully generated 1 QA pairs for chunk (ID: anujsahani01/Evaluation_Framework/eval/test_retrieval.py::chunk_0).
+2026-06-29 00:45:32 [INFO] Generated 3 samples
+2026-06-29 00:45:32 [INFO] HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 400 Bad Request"
