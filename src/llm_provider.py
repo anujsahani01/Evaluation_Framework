@@ -248,6 +248,56 @@ def _generate_compatible(
     )
 
 
+def _generate_local(
+    prompt: str,
+    system_prompt: str | None,
+    config: PipelineConfig,
+    model_override: str | None = None,
+    **kwargs,
+) -> LLMResponse:
+    """
+    Generate using a locally downloaded HuggingFace model via transformers.
+    Downloads model on first use (~few GB depending on model), then runs on CPU/GPU.
+
+    WARNING: Models like Mistral-7B are ~14GB and VERY slow on CPU (minutes per response).
+    Recommended for smaller models only (e.g., TinyLlama, Phi-2, SmolLM).
+    For 7B+ models, prefer OpenAI API — it's faster and cheaper than waiting on CPU.
+    """
+    from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
+
+    model_name = model_override or config.llm.model
+
+    # Build the full prompt
+    full_prompt = ""
+    if system_prompt:
+        full_prompt = f"[INST] {system_prompt}\n\n{prompt} [/INST]"
+    else:
+        full_prompt = f"[INST] {prompt} [/INST]"
+
+    # Use transformers pipeline (handles download + caching automatically)
+    pipe = pipeline(
+        "text-generation",
+        model=model_name,
+        max_new_tokens=kwargs.get("max_tokens", config.llm.max_tokens),
+        temperature=kwargs.get("temperature", config.llm.temperature) or 0.01,
+        do_sample=True,
+    )
+
+    result = pipe(full_prompt)
+    generated_text = result[0]["generated_text"]
+
+    # Remove the prompt from the output (transformers includes it)
+    if generated_text.startswith(full_prompt):
+        generated_text = generated_text[len(full_prompt):].strip()
+
+    return LLMResponse(
+        content=generated_text,
+        model=model_name,
+        provider="local",
+        usage={"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0},
+    )
+
+
 # =============================================================================
 # Embedding Implementations
 # =============================================================================
@@ -323,6 +373,7 @@ _GENERATORS: dict[str, Any] = {
     "huggingface": _generate_huggingface,
     "ollama": _generate_ollama,
     "compatible": _generate_compatible,
+    "local": _generate_local,
 }
 
 _EMBEDDERS: dict[str, Any] = {
@@ -373,9 +424,10 @@ def embed_texts(
     config: PipelineConfig | None = None,
 ) -> EmbeddingResponse:
     """
-    Generate embeddings using the configured provider.
+    Generate embeddings using the configured EMBEDDING provider.
 
-    Switch providers by changing config.llm.provider.
+    DECOUPLED from llm.provider — uses config.embedding.provider instead.
+    This means you can use OpenAI for LLM + HuggingFace for embeddings.
 
     Args:
         texts: List of texts to embed.
@@ -385,7 +437,7 @@ def embed_texts(
         EmbeddingResponse with embedding vectors.
     """
     cfg = config or get_config()
-    provider = cfg.llm.provider.lower()
+    provider = cfg.embedding.provider.lower()
 
     embedder = _EMBEDDERS.get(provider)
     if not embedder:

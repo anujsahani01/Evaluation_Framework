@@ -70,9 +70,10 @@ class ChunkingConfig(BaseModel):
 
 
 class EmbeddingConfig(BaseModel):
-    model: str = "text-embedding-3-small"
-    dimensions: int = 1536
-    batch_size: int = 100
+    provider: str = "huggingface"       # openai | huggingface | ollama (INDEPENDENT of llm.provider)
+    model: str = "sentence-transformers/all-MiniLM-L6-v2"
+    dimensions: int = 384
+    batch_size: int = 32
 
 
 class VectorDBConfig(BaseModel):

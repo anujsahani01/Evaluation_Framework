@@ -21,7 +21,8 @@
 #
 # Supported providers:
 #   - openai       : GPT-4o-mini, GPT-4o, GPT-3.5-turbo, etc.
-#   - huggingface  : Mistral, Llama, Phi, Qwen (via HF Inference API)
+#   - huggingface  : Mistral, Llama, Phi, Qwen (via HF Inference API — needs network)
+#   - local        : Download and run HF model locally (slow for 7B+, fine for small models)
 #   - ollama       : Any local model (llama3, mistral, codellama, etc.)
 #   - compatible   : Any OpenAI-compatible API (Groq, Together, DeepSeek)
 #
@@ -29,13 +30,13 @@
 #   1. Change provider: "openai"
 #   2. Change model: "gpt-4o-mini"
 #   3. Change api_key_env: "OPENAI_API_KEY"
-#   Done. Nothing else changes.
+#   Done. Embedding stays independent.
 #
 llm:
-  provider: "huggingface"               # openai | huggingface | ollama | compatible
-  model: "mistralai/Mistral-7B-Instruct-v0.3"   # HuggingFace model ID
-  judge_model: "mistralai/Mistral-7B-Instruct-v0.3"  # Model for DeepEval judge
-  api_key_env: "HUGGINGFACE_API_KEY"    # Environment variable name for API key
+  provider: "openai"                    # openai | huggingface | local | ollama | compatible
+  model: "gpt-4o-mini"                  # Model for generation
+  judge_model: "gpt-4o-mini"            # Model for DeepEval judge
+  api_key_env: "OPENAI_API_KEY"         # Environment variable name for API key
   base_url: null                        # Override API base URL (null = use default for provider)
   temperature: 0.0
   max_tokens: 4096
@@ -43,12 +44,15 @@ llm:
 # --- GitHub Repositories (Data Sources) ---
 github:
   repos:
-    - owner: "your-github-username"
-      name: "project-1"
+    - owner: "anujsahani01"
+      name: "Evaluation_Framework"
       branch: "main"
-    - owner: "your-github-username"
-      name: "project-2"
+    - owner: "anujsahani01"
+      name: "HeartNet"
       branch: "main"
+    - owner: "anujsahani01"
+      name: "Agentic-Mesh"
+      branch: "master"
   # File extensions to extract
   include_extensions:
     - ".py"
@@ -57,6 +61,8 @@ github:
     - ".java"
     - ".go"
     - ".rs"
+    - ".ipynb"
+    - ".toml"
   # Directories to skip
   exclude_dirs:
     - "node_modules"
@@ -84,13 +90,16 @@ chunking:
     typescript: true
 
 # --- Embedding / Vector DB Settings ---
-# Embedding model depends on your provider:
-#   openai:       "text-embedding-3-small" (1536 dims) or "text-embedding-3-large" (3072 dims)
-#   huggingface:  "sentence-transformers/all-MiniLM-L6-v2" (384 dims) or any HF model
-#   ollama:       "nomic-embed-text" (768 dims) or any model that supports /api/embeddings
+# Embedding provider is INDEPENDENT of llm.provider above.
+# You can use OpenAI for LLM + HuggingFace for embeddings simultaneously.
+#
+#   openai:       "text-embedding-3-small" (1536 dims) — needs API
+#   huggingface:  "sentence-transformers/all-MiniLM-L6-v2" (384 dims) — runs LOCALLY
+#   ollama:       "nomic-embed-text" (768 dims)
 #
 embedding:
-  model: "sentence-transformers/all-MiniLM-L6-v2"  # HF embedding model (384 dims)
+  provider: "huggingface"              # openai | huggingface | ollama (SEPARATE from llm.provider)
+  model: "sentence-transformers/all-MiniLM-L6-v2"  # Runs locally, no API call needed
   dimensions: 384
   batch_size: 32
 
