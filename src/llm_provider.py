@@ -324,7 +324,13 @@ def _embed_huggingface(texts: list[str], config: PipelineConfig) -> EmbeddingRes
     from sentence_transformers import SentenceTransformer
 
     model_name = config.embedding.model
-    model = SentenceTransformer(model_name)
+
+    # Cache the model — load once, reuse forever
+    if not hasattr(_embed_huggingface, "_model") or _embed_huggingface._model_name != model_name:
+        _embed_huggingface._model = SentenceTransformer(model_name)
+        _embed_huggingface._model_name = model_name
+
+    model = _embed_huggingface._model
 
     # Truncate long texts to avoid memory issues
     texts = [t[:2000] if len(t) > 2000 else t for t in texts]
